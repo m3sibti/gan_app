@@ -1,0 +1,23 @@
+{% extends 'gan_base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col text-center" style="margin-top: 10px">
+                <h3>Welcome to GAN Factory</h3>
+                <form method="post">
+                    <button type="submit" class="btn btn-primary">Click ME!</button>
+                </form>
+
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            {% if image %}
+                <img src="{{ image }}" alt="Please Submit"/>
+            {% else %}
+                <h5>Please generate graph using above button</h5>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}
