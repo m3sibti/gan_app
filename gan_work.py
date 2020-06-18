@@ -29,19 +29,22 @@ def get_inputs(latent_dim=100, n_imgs=10, target_class='shirt'):
 def generate_fashion_using_CGAN():
     # initialize Conditional-GAN
     fahion_generator = keras.models.load_model(f'{models_dir}conditional_fashion_gan.h5')
+    # Convert plot to PNG image
+    pngImage = io.BytesIO()
+
     # generate fake images
     tc = 'bag'  # for generating labels
     gen_imgs = fahion_generator(get_inputs(target_class=tc))
     # plot them
-    plt.figure(figsize=(10, 10))
+    plt.figure(figsize=(10, 2))
+    fake_prices = np.random.randint(low=20, high=200, size=(10,))
     for i in range(5):
         plt.subplot(1, 5, i + 1)
         plt.axis('off')
-        plt.imshow(gen_imgs[1, :, :, 0], cmap='gray_r')
-    # plt.show()
-    pngImage = io.BytesIO()
-    f = plt.savefig('k.')
-    FigureCanvas(f).print_png(pngImage)
+        plt.imshow(gen_imgs[i, :, :, 0], cmap='gray_r')
+        plt.title("$" + str(fake_prices[i]))
+    fig = plt.gcf()
+    FigureCanvas(fig).print_png(pngImage)
     # Encode PNG image to base64 string
     pngImageB64String = "data:image/png;base64,"
     pngImageB64String += base64.b64encode(pngImage.getvalue()).decode('utf8')

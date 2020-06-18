@@ -8,8 +8,11 @@ app.static_folder = 'static'
 @app.route('/', methods=['GET', 'POST'])
 def hello_world():
     if request.method == 'POST':
-        image = generate_fashion_using_CGAN()
-        return render_template("gan_index.html", image=image)
+        images = list()
+        for i in range(2):
+            image = generate_fashion_using_CGAN()
+            images.append(image)
+        return render_template("gan_index.html", images=images)
         # show_something()
         # print_hello()
     return render_template('gan_index.html')
