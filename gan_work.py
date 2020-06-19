@@ -18,7 +18,7 @@ def get_inputs(latent_dim=100, n_imgs=10, target_class='shirt'):
     # dictionary for labels
     labels_dict = {'tshirt': 0, 'trouser': 1, 'pullover': 2,
                    'dress': 3, 'coat': 4, 'sandal': 5,
-                   'shirt': 6, 'sneaker': 7, 'bag': 8, 'ankle_boot': 9}
+                   'shirt': 6, 'sneaker': 7, 'bag': 8, 'ankle boot': 9}
 
     # target class can be any label 0-9
     labels_to_generate = np.zeros((n_imgs, 1)) + labels_dict[target_class]
@@ -26,17 +26,17 @@ def get_inputs(latent_dim=100, n_imgs=10, target_class='shirt'):
     return [z, labels_to_generate]
 
 
-def generate_fashion_using_CGAN():
+def generate_fashion_using_CGAN(label):
     # initialize Conditional-GAN
     fahion_generator = keras.models.load_model(f'{models_dir}conditional_fashion_gan.h5')
     # Convert plot to PNG image
     pngImage = io.BytesIO()
 
     # generate fake images
-    tc = 'bag'  # for generating labels
+    tc = label  # for generating labels
     gen_imgs = fahion_generator(get_inputs(target_class=tc))
     # plot them
-    plt.figure(figsize=(10, 2))
+    plt.figure(figsize=(6, 2))
     fake_prices = np.random.randint(low=20, high=200, size=(10,))
     for i in range(5):
         plt.subplot(1, 5, i + 1)

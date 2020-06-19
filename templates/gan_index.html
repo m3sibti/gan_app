@@ -1,31 +1,71 @@
 {% extends 'gan_base.html' %}
 {% block content %}
-    <div class="container">
+    <div class="row justify-content-center" style="padding: 18px; background-color: lightblue">
+        <h1 style="color: white">WELCOME TO GAN FACTORY</h1>
+    </div>
+    <br>
+    {# Fashion Generator Conditional GAN BlOCK   #}
+    <div class=" container shadow-lg p-3 mb-5 bg-white rounded">
+        <h2 style="text-align: center; color: darkgreen;">Fashion
+            Generator</h2>
+        <br>
         <div class="row justify-content-center">
             <div class="col text-center" style="margin-top: 10px">
-                <h3>Welcome to GAN Factory</h3>
                 <form method="post">
-                    <button type="submit" class="btn btn-primary">Click ME!</button>
+                    <div class="form-group">
+                        <label for="labels">What do you want to generate? </label>
+                        <select class="form-control-sm" name="labels" id="labels">
+                            <option value="tshirt" {% if label =="TSHIRTS" %} selected {% endif %}>T-shirts</option>
+                            <option value="trouser" {% if label =="TROUSERS" %} selected {% endif %}>Trousers</option>
+                            <option value="pullover" {% if label =="PULLOVERS" %} selected {% endif %}>Pullovers
+                            </option>
+                            <option value="dress" {% if label =="DRESSES" %} selected {% endif %}>Dresses</option>
+                            <option value="coat" {% if label =="COATS" %} selected {% endif %}>Coats</option>
+                            <option value="sandal" {% if label =="SANDALS" %} selected {% endif %}>Sandals</option>
+                            <option value="shirt" {% if label =="SHIRTS" %} selected {% endif %}>Shirts</option>
+                            <option value="sneaker" {% if label =="SNEAKERS" %} selected {% endif %}>Sneakers</option>
+                            <option value="bag" {% if label =="BAGS" %} selected {% endif %}>Bags</option>
+                            <option value="ankle boot" {% if label =="ANKLE BOOTS" %} selected {% endif %}>Ankle Boots
+                            </option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Order Here!!!</button>
                 </form>
 
             </div>
         </div>
         <br>
         <div class="container">
-            {% if images %}
-                {% for img in images %}
-                    <div class="row justify-content-center">
-                        <img src="{{ img }}" alt="Please Submit"/>
-                    </div>
-                    <div class="row justify-content-center">
-                        <button type="button" class="btn btn-success">Buy Bundle</button>
-                    </div>
-                    <br>
-                {% endfor %}
+            {% if img %}
+                <br>
+                <div class="row justify-content-center">
+                    <p>Here are some <strong class="class_label"> {{ label }}</strong> for you.
+                    </p>
+                </div>
+                <div class="row justify-content-center">
+                    <img src="{{ img }}" alt="Image"/>
+                </div>
+                <br>
+                <div class="row justify-content-center">
+                    <button type="button" class="btn btn-success">Buy this bundle</button>
+                </div>
+                {#            {% if images %}#}
+                {#                {% for img in images %}#}
+                {#                    <div class="row justify-content-center">#}
+                {#                        <img src="{{ img }}" alt="Please Submit"/>#}
+                {#                    </div>#}
+                {#                    <div class="row justify-content-center">#}
+                {#                        <button type="button" class="btn btn-success">Buy Bundle</button>#}
+                {#                    </div>#}
+                {#                    <br>#}
+                {#                {% endfor %}#}
             {% else %}
-                <h5>Please generate graph using above button</h5>
-            {% endif %}
 
+                <div class="row justify-content-center">
+                    <h5>Please place your order above</h5>
+                </div>
+            {% endif %}
+            <br>
         </div>
     </div>
 {% endblock %}
